@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html> 
+        <head> 
+                <title>Uas PWS</title> 
+                <meta charset="UTF-8"> 
+                <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script> 
+        </head> 
+        <body> 
+                <div>Final Project PWS</div> 
+                <hr> 
+                <script> 
+                        const url = "http://localhost:8080/POST"; 
+                        function post(){ 
+                                let newID = document.getElementById("myid").value; 
+                                let name = document.getElementById("name").value; 
+                                let nik = document.getElementById("nik").value; 
+                                let address = document.getElementById("address").value;
+                                let photo = document.getElementById("photo").value;
+                                let dataText = {"id":newID,"name":name,"nik":nik,"address":address,"photo":photo}; 
+                                let dataJson = JSON.stringify(dataText); 
+                                $.ajax({ 
+                                        url: url, 
+                                        method: 'POST', 
+                                        data: dataJson, 
+                                        contentType: 'application/json', 
+                                        dataType: 'text', 
+                                        success: function(result){ 
+                                                console.log(result); 
+                                        } 
+                                }); 
+                        } 
+    
+                        function put(){ 
+                        const urlp = "http://localhost:8080/PUT"; 
+                                let editID = document.getElementById("myid").value; 
+                                let name = document.getElementById("name").value; 
+                                let nik = document.getElementById("nik").value; 
+                                let address = document.getElementById("address").value;
+                                let photo = document.getElementById("photo").value;
+                                let dataText = {"id":editID,"name":name,"nik":nik,"address":address}; 
+                                let dataJson = JSON.stringify(dataText); 
+                                $.ajax({ 
+                                        url: urlp, 
+                                        method: 'PUT', 
+                                        data: dataJson, 
+                                        contentType: 'application/json', 
+                                        dataType: 'text', 
+                                        success: function(result){ 
+                                                document.getElementById("viewer").innerHTML = result; 
+ 
+                                        } 
+                                }); 
+                        } 
+    
+                        function get(){ 
+                        const urlg = "http://localhost:8080/GET"; 
+                                $.ajax({ 
+                                        url: urlg, 
+                                        method: 'GET', 
+                                        dataType: 'text', 
+                                        success: function(result){ 
+                                                document.getElementById("viewer").innerHTML = result; 
+                                        } 
+                                }); 
+                        } 
+    
+                        function delID(){ 
+                        const urlg = "http://localhost:8080/DELETE"; 
+                                let editID = document.getElementById("myid").value; 
+                                let name = document.getElementById("name").value; 
+                                let nik = document.getElementById("nik").value; 
+                                let address = document.getElementById("address").value;
+                                let photo = document.getElementById("photo").value;
+                                let dataText = {"id":editID,"name":name,"nik":nik,"address":address}; 
+                                let dataJson = JSON.stringify(dataText); 
+                                $.ajax({ 
+                                        url: urlg, 
+                                        method: 'DELETE', 
+                                        data: dataJson, 
+                                        contentType: 'application/json', 
+                                        dataType: 'text', 
+                                        success: function(result){ 
+                                                document.getElementById("viewer").innerHTML = result; 
+                                        } 
+                                }); 
+                        }
+                </script>
+		Masukkan Id : <input type="text" id="myid" name="myid">
+                <hr>
+		Masukkan Nama : <input type="text" id="name" name="name">
+                <hr>
+		Masukkan Nik : <input type="text" id="nik" name="nik">
+                <hr>
+                Masukkan Address : <input type="text" id="address" name="address">
+                <hr>
+                Masukkan Photo : <input type="file" id="photo" name="photo">
+                
+		<hr>
+		<button onclick="get()">Get The Data from Web Server</button><br>
+		<button onclick="post()">Send The Data to Web Server</button><br>
+		<button onclick="put()">Edit The Data of Web Server</button><br>
+		<button onclick="delID()">Delete The Data of Web Server</button>
+		<hr>
+		<div id="viewer"></div>
+	</body>
+</html>
+    
+                   
+                                 
